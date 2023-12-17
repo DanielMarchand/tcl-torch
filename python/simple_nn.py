@@ -28,9 +28,8 @@ def train_model(model, train_loader, learning_rate, epochs, log_interval):
             loss = criterion(output, target)
             loss.backward()
             optimizer.step()
-            
-            if batch_idx % log_interval == 0:
-                print(f"Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)} ({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}")
+        if epoch % log_interval == 0:
+            print(f"Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)} ({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}")
 
 def save_model_weights(model, directory):
     model_path = os.path.join(directory, 'model_weights.pth')
@@ -64,7 +63,7 @@ def main(dir_path, mode):
     with open(config_path, 'r') as f:
         config = json.load(f)
 
-    training_data_path = os.path.join(dir_path, config['trainingData'])
+    training_data_path = os.path.join(get_csv_path(), config['trainingData'])
     data = pd.read_csv(training_data_path)
     x = torch.tensor(data.iloc[:, 0].values, dtype=torch.float32)
     y = torch.tensor(data.iloc[:, 1].values, dtype=torch.float32)
@@ -74,7 +73,8 @@ def main(dir_path, mode):
                      num_layers=config['numLayers'])
 
     if mode == "train":
-        train_loader = torch.utils.data.DataLoader(torch.utils.data.TensorDataset(x.view(-1, 1), y.view(-1, 1)), batch_size=64)
+        train_loader = torch.utils.data.DataLoader(torch.utils.data.TensorDataset(x.view(-1, 1), y.view(-1, 1)),
+                                                    batch_size=64)
         train_model(model, train_loader, config['learningRate'], config['epochs'], config['logInterval'])
         save_model_weights(model, dir_path)
     elif mode == "predict":

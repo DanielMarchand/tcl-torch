@@ -17,11 +17,16 @@ proc Fit1dDataViewWindow {} {
     # Design Architecture 
     button $win.design -text "Design Neural Network Architecture" -command createNNConfigWindow
     pack $win.design -padx 10 -pady 10
+
+    # Train Neural Network 
+    button $win.design -text "Train Neural Network" -command createNNConfigWindow
+    pack $win.design -padx 10 -pady 10
 }
 
 source "${::TclTorch::tclRoot}/windows/data_plotting_window.tcl"
 source "${::TclTorch::tclRoot}/windows/neural_network_config_window.tcl"
 source "${::TclTorch::tclRoot}/windows/csv_upload_view_window.tcl"
+source "${::TclTorch::tclRoot}/windows/train_neuralnetwork.tcl"
 
 # Call the function to create the window
 Fit1dDataViewWindow
