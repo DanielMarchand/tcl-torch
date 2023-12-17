@@ -1,6 +1,56 @@
 package require Tk
 package require TclTorch
 
+# Procedure to save the model configuration as a JSON file
+proc saveModelConfig {nnConfig modelName modelDir} {
+    # File path for the JSON file
+    set filePath [file join $modelDir "config.json"]
+
+    # Save the dictionary to a JSON file
+    TclTorch::dictToJsonFile $nnConfig $filePath
+}
+
+# Procedure to confirm overwrite of an existing model
+proc confirmOverwrite {modelDir parentWindow} {
+    set confirmWindow [toplevel .confirmOverwrite]
+    wm title $confirmWindow "Confirm Overwrite"
+
+    label $confirmWindow.msg -text "Model already exists. Overwrite?"
+    button $confirmWindow.yesBtn -text "Yes" -command [list performOverwrite $modelDir $parentWindow $confirmWindow]
+    button $confirmWindow.noBtn -text "No" -command [list destroy $confirmWindow]
+
+    pack $confirmWindow.msg -padx 10 -pady 10
+    pack $confirmWindow.yesBtn -padx 10 -pady 5
+    pack $confirmWindow.noBtn -padx 10 -pady 5
+}
+
+# Procedure to perform overwrite
+proc performOverwrite {modelDir parentWindow confirmWindow} {
+    file delete -force -- $modelDir
+    saveModelConfig $modelDir
+    destroy $confirmWindow
+    raise $parentWindow
+}
+
+# Procedure to store the model configuration
+proc storeModel {nnConfigWindow} {
+    global nnConfig modelName 
+    
+    # baseNNModelDir
+
+    # Convert the associative array to a dictionary
+    set nnConfigDict [array get nnConfig]
+
+    # Model directory path
+    set modelDir [file join $TclTorch::baseNNModelDir $modelName]
+
+    # Check if the model directory already exists
+    if {[file exists $modelDir]} {
+        confirmOverwrite $nnConfigDict $modelName $modelDir $nnConfigWindow
+    } else {
+        saveModelConfig $nnConfigDict $modelName $modelDir
+    }
+}
 
 # Procedure to create the Neural Network Configuration Window
 proc createNNConfigWindow {} {

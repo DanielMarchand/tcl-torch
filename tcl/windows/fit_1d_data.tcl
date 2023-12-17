@@ -3,7 +3,7 @@ package require TclTorch
 
 # Creating the Data Upload and Viewing Window
 proc Fit1dDataViewWindow {} {
-    set win [toplevel .fit1dDataView]
+    set win [toplevel .fit1dDataViewWindow]
     wm title $win "Data Upload and Viewing"
 
     # Upload Button
