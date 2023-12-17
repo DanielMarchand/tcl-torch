@@ -1,14 +1,23 @@
 #!/usr/bin/env tclsh
 
 package require Tk
-package require tcl-torch
+package require TclTorch
 
 # Function to open the function selection window
 proc openFunctionSelectionWindow {} {
-    source "frontend/windows/function_selection_window.tcl"
-    destroy .mainWindow  ;# Close the main window
+    variable ::TclTorch::tclRoot
 
+    source "${::TclTorch::tclRoot}/windows/function_selection_window.tcl"
+    destroy .mainWindow  ;# Close the main window
 }
+
+# Function to open the function selection window
+proc verifyPythonInstallation {} {
+    variable ::TclTorch::tclRoot
+
+    puts "Python installation verified!"
+}
+
 
 # Function to create the main window
 proc createMainWindow {} {
@@ -24,6 +33,11 @@ proc createMainWindow {} {
     button $mainWindow.startBtn -text "Start Program" -command openFunctionSelectionWindow
     pack $mainWindow.startBtn -padx 20 -pady 10
 
+    # Verify python install here
+    button $mainWindow.verifyPython -text "Verify Python Installation" -command verifyPythonInstallation
+    pack $mainWindow.verifyPython -padx 20 -pady 10
+
+    
     # Additional setup for the main window can go here...
     #destroy . 
 }
