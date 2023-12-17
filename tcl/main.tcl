@@ -14,6 +14,7 @@ proc openFunctionSelectionWindow {} {
 # Function to open the function selection window
 proc verifyPythonInstallation {} {
     variable ::TclTorch::tclRoot
+    TclTorch::checkPythonAndDependencies
 
     puts "Python installation verified!"
 }
