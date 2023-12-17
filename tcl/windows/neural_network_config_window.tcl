@@ -60,15 +60,26 @@ proc storeModel {nnConfigWindow} {
     }
 }
 
+# Function to list available CSV files in a directory
+proc listAvailableCSVs {directory} {
+    set csvFiles [glob -nocomplain -directory $directory -types {f} *.csv]
+    set csvFileNames {}
+    foreach path $csvFiles {
+        lappend csvFileNames [file tail $path]
+    }
+    return $csvFileNames
+}
+
 # Procedure to create the Neural Network Configuration Window
 proc createNNConfigWindow {} {
-    variable nnConfig
+    global TclTorch::csvStorageLocation
+    variable nnConfig 
     variable modelName "your_model_name"
 
     # Initialize the associative array with default values
     set nnConfig(neuronsPerLayer) 20
     set nnConfig(numLayers) 2
-    set nnConfig(numNetworks) 5
+    #set nnConfig(numNetworks) 5
     set nnConfig(learningRate) 1e-4
     set nnConfig(epochs) 500
     set nnConfig(logInterval) 100
@@ -83,8 +94,8 @@ proc createNNConfigWindow {} {
     label $nnConfigWindow.layersLbl -text "Number of Layers:"
     entry $nnConfigWindow.layersEntry -textvariable nnConfig(numLayers)
 
-    label $nnConfigWindow.networksLbl -text "Number of Networks:"
-    entry $nnConfigWindow.networksEntry -textvariable nnConfig(numNetworks)
+    #label $nnConfigWindow.networksLbl -text "Number of Networks:"
+    #entry $nnConfigWindow.networksEntry -textvariable nnConfig(numNetworks)
 
     label $nnConfigWindow.lrLbl -text "Learning Rate:"
     entry $nnConfigWindow.lrEntry -textvariable nnConfig(learningRate)
@@ -103,18 +114,31 @@ proc createNNConfigWindow {} {
     radiobutton $nnConfigWindow.gpuYes -text "Yes" -state disabled -value True
     radiobutton $nnConfigWindow.gpuNo -text "No" -value False
 
+
+    # Create a dropdown menu for selecting training data
+    label $nnConfigWindow.trainingDataLbl -text "Training Data:"
+    ttk::combobox $nnConfigWindow.trainingDataCombo -textvariable nnConfig(trainingData) -state readonly
+
+    # Populate the dropdown with CSV file names
+    set csvFiles [listAvailableCSVs $TclTorch::csvStorageLocation]
+    $nnConfigWindow.trainingDataCombo configure -values $csvFiles
+
+
     # Store Model Button
     button $nnConfigWindow.storeModelBtn -text "Store Model" -command [list storeModel $nnConfigWindow]
 
     # Arrange widgets using grid
     grid $nnConfigWindow.neuronsLbl $nnConfigWindow.neuronsEntry
     grid $nnConfigWindow.layersLbl $nnConfigWindow.layersEntry
-    grid $nnConfigWindow.networksLbl $nnConfigWindow.networksEntry
+    #grid $nnConfigWindow.networksLbl $nnConfigWindow.networksEntry
     grid $nnConfigWindow.lrLbl $nnConfigWindow.lrEntry
     grid $nnConfigWindow.epochsLbl $nnConfigWindow.epochsEntry
     grid $nnConfigWindow.logLbl $nnConfigWindow.logEntry
     grid $nnConfigWindow.modelNameLbl $nnConfigWindow.modelNameEntry
     grid $nnConfigWindow.gpuLbl $nnConfigWindow.gpuYes $nnConfigWindow.gpuNo
+    # Arrange the new training data widgets using grid
+    grid $nnConfigWindow.trainingDataLbl $nnConfigWindow.trainingDataCombo
+
     grid $nnConfigWindow.storeModelBtn
 }
 
