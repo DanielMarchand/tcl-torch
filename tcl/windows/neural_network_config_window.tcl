@@ -6,17 +6,22 @@ proc saveModelConfig {nnConfig modelName modelDir} {
     # File path for the JSON file
     set filePath [file join $modelDir "config.json"]
 
+    # Ensure the modelDir directory exists, create it if necessary
+    if {![file isdirectory $modelDir]} {
+        file mkdir $modelDir
+    }
+
     # Save the dictionary to a JSON file
     TclTorch::dictToJsonFile $nnConfig $filePath
 }
 
 # Procedure to confirm overwrite of an existing model
-proc confirmOverwrite {modelDir parentWindow} {
+proc confirmOverwrite {nnConfigDict modelName modelDir nnConfigWindow} {
     set confirmWindow [toplevel .confirmOverwrite]
     wm title $confirmWindow "Confirm Overwrite"
 
     label $confirmWindow.msg -text "Model already exists. Overwrite?"
-    button $confirmWindow.yesBtn -text "Yes" -command [list performOverwrite $modelDir $parentWindow $confirmWindow]
+    button $confirmWindow.yesBtn -text "Yes" -command [list performOverwrite $nnConfigDict $modelName $modelDir $nnConfigWindow $confirmWindow]
     button $confirmWindow.noBtn -text "No" -command [list destroy $confirmWindow]
 
     pack $confirmWindow.msg -padx 10 -pady 10
@@ -24,13 +29,15 @@ proc confirmOverwrite {modelDir parentWindow} {
     pack $confirmWindow.noBtn -padx 10 -pady 5
 }
 
+
 # Procedure to perform overwrite
-proc performOverwrite {modelDir parentWindow confirmWindow} {
+proc performOverwrite {nnConfigDict modelName modelDir nnConfigWindow confirmWindow} {
     file delete -force -- $modelDir
-    saveModelConfig $modelDir
+    saveModelConfig $nnConfigDict $modelName $modelDir
     destroy $confirmWindow
-    raise $parentWindow
+    destroy $nnConfigWindow
 }
+
 
 # Procedure to store the model configuration
 proc storeModel {nnConfigWindow} {
@@ -49,6 +56,7 @@ proc storeModel {nnConfigWindow} {
         confirmOverwrite $nnConfigDict $modelName $modelDir $nnConfigWindow
     } else {
         saveModelConfig $nnConfigDict $modelName $modelDir
+        destroy $nnConfigWindow
     }
 }
 

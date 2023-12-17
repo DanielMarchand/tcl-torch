@@ -19,11 +19,11 @@
 # Procedure to convert a dictionary to JSON and write to a file
 proc dictToJsonFile {dict filepath} {
     # Convert the dictionary to a JSON string
-    package require json
-    set json [json::write object {*}[dict get $dict]]
+    package require json::write
+    set json_content [json::write object {*}[dict get $dict]]
 
     # Write the JSON string to the specified file
     set configFile [open $filepath "w"]
-    puts $configFile $json
+    puts $configFile $json_content
     close $configFile
 }
