@@ -12,8 +12,11 @@ proc handleTestPythonInterface {} {
 }
 
 proc handleFit1DData {} {
-    puts "Fit 1D Data functionality selected."
+    puts "Test Python Interface selected."
     # Placeholder for future functionality
+    source "${::TclTorch::tclRoot}/windows/fit_1d_data.tcl"
+
+    destroy .function_selection ;
 }
 
 proc handleFit2DData {} {
@@ -58,9 +61,9 @@ proc createFunctionSelectionWindow {} {
     # Initialize the selected functionality variable
     set selectedFunctionality "fit1D" ; # Default selection
 
-    # Create radio buttons for functionality selection
-    radiobutton $functionSelectionWindow.test -text "Testing Python Interface" \
-        -variable selectedFunctionality -value "Test"
+    # # Create radio buttons for functionality selection
+    # radiobutton $functionSelectionWindow.test -text "Testing Python Interface" \
+    #     -variable selectedFunctionality -value "Test"
     radiobutton $functionSelectionWindow.fit1D -text "Fit 1D Data" \
         -variable selectedFunctionality -value "fit1D"
     radiobutton $functionSelectionWindow.fit2D -text "Fit 2D Data (Coming Soon!)" \
@@ -68,7 +71,7 @@ proc createFunctionSelectionWindow {} {
 
     # Create and pack the select button
     button $functionSelectionWindow.selectButton -text "Select" -command selectFunctionality
-    pack $functionSelectionWindow.test -anchor w
+    # pack $functionSelectionWindow.test -anchor w
     pack $functionSelectionWindow.fit1D -anchor w
     pack $functionSelectionWindow.fit2D -anchor w
     pack $functionSelectionWindow.selectButton
