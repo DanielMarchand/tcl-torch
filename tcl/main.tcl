@@ -17,6 +17,8 @@ proc verifyPythonInstallation {} {
     TclTorch::checkPythonAndDependencies
 
     puts "Python installation verified!"
+    variable ::TclTorch::csvStorageLocation
+    #puts "CSV STORED TO: $::TclTorch::csvStorageLocation"
 }
 
 

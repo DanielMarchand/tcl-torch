@@ -1,6 +1,5 @@
 # Procedures to handle calling Python scripts and processing their outputs
 # Set the path to the Python executable
-set ::pythonExecutable "python3"
 
 # Executes a Python script and returns its output
 proc execPython {scriptPath args} {
@@ -33,5 +32,26 @@ proc checkPythonAndDependencies {} {
         puts "Test passed: Python and all dependencies are available."
     } else {
         puts "Test failed: $result (exit status: $exitStatus)"
+    }
+}
+
+# Function to save and validate a CSV file using Python
+proc saveValidateCSV {inputPath} {
+    global pythonExecutable csvStorageLocation
+
+    set pythonScript "${::TclTorch::pythonRoot}/save_and_validate_csv.py"
+    set args [list $inputPath $csvStorageLocation]
+
+    # Use execPython to execute the Python script
+    set executionResult [execPython $pythonScript $args]
+
+    # Extract the return status and result
+    set exitStatus [lindex $executionResult 0]
+    set result [lindex $executionResult 1]
+
+    if {$exitStatus != 0 || [string match "Error:*" $result]} {
+        puts "Error in processing CSV: $result"
+    } else {
+        puts $result
     }
 }

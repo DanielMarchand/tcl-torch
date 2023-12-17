@@ -1,16 +1,45 @@
 #!/usr/bin/env tclsh
 package require Tk
 
-# Declare a global variable for selected functionality
-variable selectedFunctionality
+# Procedures for each functionality
+proc handleTestPythonInterface {} {
+    puts "Test Python Interface selected."
+    # Placeholder for future functionality
+}
+
+proc handleFit1DData {} {
+    puts "Fit 1D Data functionality selected."
+    # Placeholder for future functionality
+}
+
+proc handleFit2DData {} {
+    puts "Fit 2D Data functionality selected."
+    # Placeholder for future functionality
+}
+
+proc handleDefaultCase {} {
+    puts "Selected functionality is not implemented yet."
+    # Placeholder for unimplemented functionality
+}
 
 # Function to handle the selection of functionality
 proc selectFunctionality {} {
     global selectedFunctionality
 
-    # Handle the selected functionality
-    puts "Selected functionality: $selectedFunctionality"
-    # Here, add the specific action based on the selected functionality
+    switch -- $selectedFunctionality {
+        "Test" {
+            handleTestPythonInterface
+        }
+        "fit1D" {
+            handleFit1DData
+        }
+        "fit2D" {
+            handleFit2DData
+        }
+        default {
+            handleDefaultCase
+        }
+    }
 }
 
 # Create the Function Selection Window
