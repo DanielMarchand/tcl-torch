@@ -40,7 +40,7 @@ proc saveValidateCSV {inputPath} {
     global pythonExecutable csvStorageLocation
 
     set pythonScript "${::TclTorch::pythonRoot}/save_and_validate_csv.py"
-    set args [list $inputPath $csvStorageLocation]
+    set args [list $inputPath $::TclTorch::csvStorageLocation]
 
     # Use execPython to execute the Python script
     set executionResult [execPython $pythonScript $args]

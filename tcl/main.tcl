@@ -28,7 +28,7 @@ proc createMainWindow {} {
     wm title $mainWindow "PyTorch-Tcl Data Analysis App"
 
     # Load and display the logo
-    set logoImage [image create photo -file "resources/logo.png"]
+    set logoImage [image create photo -file "images/logo.png"]
     label $mainWindow.logo -image $logoImage
     pack $mainWindow.logo -padx 20 -pady 20
 

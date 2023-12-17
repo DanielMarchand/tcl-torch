@@ -1,10 +1,14 @@
 #!/usr/bin/env tclsh
 package require Tk
+package require TclTorch
 
 # Procedures for each functionality
 proc handleTestPythonInterface {} {
     puts "Test Python Interface selected."
     # Placeholder for future functionality
+    source "${::TclTorch::tclRoot}/windows/data_upload_view_window.tcl"
+
+    destroy .function_selection ;
 }
 
 proc handleFit1DData {} {
@@ -40,6 +44,7 @@ proc selectFunctionality {} {
             handleDefaultCase
         }
     }
+
 }
 
 # Create the Function Selection Window

@@ -7,6 +7,7 @@ namespace eval TclTorch {
 
     source ${tclRoot}/config.tcl
     source ${tclRoot}/interface/python_interface.tcl
+    source ${tclRoot}/utils/temp_dirs.tcl
 
     
 }
