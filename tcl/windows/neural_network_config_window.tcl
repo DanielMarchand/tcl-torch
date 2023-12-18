@@ -77,12 +77,12 @@ proc createNNConfigWindow {} {
     variable modelName "your_model_name"
 
     # Initialize the associative array with default values
-    set nnConfig(neuronsPerLayer) 20
+    set nnConfig(neuronsPerLayer) 40
     set nnConfig(numLayers) 2
     #set nnConfig(numNetworks) 5
-    set nnConfig(learningRate) 1e-4
+    set nnConfig(learningRate) 5e-3
     set nnConfig(epochs) 500
-    set nnConfig(logInterval) 100
+    set nnConfig(logInterval) 10
 
     set nnConfigWindow [toplevel .nnConfig]
     wm title $nnConfigWindow "Neural Network Configuration"
