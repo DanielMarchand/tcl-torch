@@ -50,13 +50,13 @@ def get_csv_path():
     return os.path.join(os.path.dirname(script_path), '..', 'resources', 'data', 'csv')
 
 
-def predict_and_save(model, data, directory, filename):
+def predict_and_save(model, data, directory):
     model.eval()  # Set the model to evaluation mode
     x = torch.tensor(data.iloc[:, 0].values, dtype=torch.float32).view(-1, 1)
     with torch.no_grad():
         predictions = model(x).view(-1).numpy()
     data['Predictions'] = predictions
-    data.to_csv(os.path.join(directory, f"predictions_{filename}"), index=False)
+    data.to_csv(os.path.join(directory, f"predictions.csv"), index=False)
 
 def main(dir_path, mode):
     config_path = os.path.join(dir_path, 'config.json')
@@ -79,7 +79,7 @@ def main(dir_path, mode):
         save_model_weights(model, dir_path)
     elif mode == "predict":
         load_model_weights(model, dir_path)
-        predict_and_save(model, data, dir_path, config['trainingData'])
+        predict_and_save(model, data, dir_path)
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:

@@ -8,17 +8,19 @@ def plot_csv(file_path, output_dir):
 
     # Get column names
     x_col = df.columns[0]  # First column as x-axis
-    y_col = df.columns[1]  # Second column as y-axis
 
     # Create the plot
     plt.figure()
-    plt.plot(df[x_col], df[y_col])  # Plot x and y columns
-    plt.xlabel(x_col)  # Label x-axis with x header
-    plt.ylabel(y_col)  # Label y-axis with y header
+    for y_col in df.columns[1:]:  # Loop through all columns except the first
+        plt.plot(df[x_col], df[y_col], label=y_col)  # Plot each column against the first column
+
+    plt.xlabel(x_col)  # Label x-axis with the first column header
+    plt.legend()  # Add a legend
 
     # Save the plot to an output file
-    output_file = os.path.join(output_dir, os.path.basename(file_path) + ".png")
+    output_file = os.path.join(output_dir, os.path.splitext(os.path.basename(file_path))[0] + "_plot.png")
     plt.savefig(output_file)
+    plt.close()  # Close the plot to free memory
     return output_file
 
 if __name__ == "__main__":

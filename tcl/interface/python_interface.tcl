@@ -55,3 +55,40 @@ proc saveValidateCSV {inputPath} {
         puts $result
     }
 }
+# Procedure to train the neural network model using Python script
+proc trainNeuralNetwork {modelDir} {
+    set pythonScript "${::TclTorch::pythonRoot}/simple_nn.py"
+    set args [list $modelDir train]
+
+    # Use execPython to execute the Python script in 'train' mode
+    set executionResult [execPython $pythonScript $args]
+
+    # Handle the execution result
+    set exitStatus [lindex $executionResult 0]
+    set result [lindex $executionResult 1]
+
+    if {$exitStatus == 0} {
+        puts "Training completed successfully."
+    } else {
+        puts "Error in training model: $result"
+    }
+}
+
+# Procedure to predict using the neural network model using Python script
+proc predictNeuralNetwork {modelDir} {
+    set pythonScript "${::TclTorch::pythonRoot}/simple_nn.py"
+    set args [list $modelDir predict]
+
+    # Use execPython to execute the Python script in 'predict' mode
+    set executionResult [execPython $pythonScript $args]
+
+    # Handle the execution result
+    set exitStatus [lindex $executionResult 0]
+    set result [lindex $executionResult 1]
+
+    if {$exitStatus == 0} {
+        puts "Prediction completed successfully."
+    } else {
+        puts "Error in prediction: $result"
+    }
+}
