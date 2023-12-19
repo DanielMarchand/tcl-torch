@@ -57,7 +57,3 @@ This system installation has only been tested on the following system.
 ## Notes
 - The tool currently does not support logging, so it's recommended to use smaller datasets and simpler network architectures for quicker results.
 - Randomness in training may lead to variations in results.
-
-
-Certainly! Here's how the "Getting Started" section of the README can be formatted with images placed below each subtitle, providing a clear and structured visual guide:
-
