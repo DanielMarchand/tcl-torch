@@ -20,31 +20,31 @@ This system installation has only been tested on the following system.
    - This needs to be done for each new terminal session or you can set it permanently in `.bashrc`.
 
 ## Getting Started
-1. **Initial Screen**:
+### 1. **Initial Screen**:
 ![Start Screen](images/readme/start_screen.png)
    - Upon starting the program, you'll be greeted with the **Start Screen**.
    - Click "Verify Python Installation" to ensure all required packages are installed.
    - Then click "Start Program" to begin.
 
-2. **Function Selection**:
+### 2. **Function Selection**:
 ![Function Select](images/readme/function_select.png)
    - You'll then see the **Function Select** screen.
    - Click on "Fit1D Data" to proceed.
 
-3. **Data Upload**:
+### 3. **Data Upload**:
 ![View Upload CSV](images/readme/view_upload_csv.png)
    - Click "Upload CSV" to upload your data file.
    - Data should be in CSV format with two columns, each having a header.
    - You can use your own CSV or an example from the `example` directory.
    - Verify the uploaded data using "View Uploaded CSV".
 
-4. **Design Neural Network**:
+### 4. **Design Neural Network**:
 ![Design Neural Network](images/readme/design_neural_network.png)
    - Click on "Design Neural Network Architecture".
    - Set parameters such as neurons per layer, number of layers, learning rate, number of epochs, and input data.
    - Note: GPU usage is currently disabled.
 
-5. **Train Neural Network and View Results**:
+### 5. **Train Neural Network and View Results**:
 ![Train Neural Network](images/readme/fit_neural_network.png)
    - After designing the architecture, click on "Train Neural Network".
    - Select one of the neural networks and click "Train and Predict on Data".
@@ -55,4 +55,9 @@ This system installation has only been tested on the following system.
 ## Notes
 - The tool currently does not support logging, so it's recommended to use smaller datasets and simpler network architectures for quicker results.
 - Randomness in training may lead to variations in results.
+
+
+Certainly! Here's how the "Getting Started" section of the README can be formatted with images placed below each subtitle, providing a clear and structured visual guide:
+
+## Getting Started
 
