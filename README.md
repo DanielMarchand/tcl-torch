@@ -27,11 +27,11 @@ This system installation has only been tested on the following system.
    - Then click "Start Program" to begin.
 
 ### 2. **Function Selection**:
-![Function Select](images/readme/function_select.png)
    - You'll then see the **Function Select** screen.
    - Click on "Fit1D Data" to proceed.
 
 ### 3. **Data Upload**:
+![Function Select](images/readme/function_select.png)
 ![View Upload CSV](images/readme/view_upload_csv.png)
    - Click "Upload CSV" to upload your data file.
    - Data should be in CSV format with two columns, each having a header.
