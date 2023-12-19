@@ -21,31 +21,29 @@ This system installation has only been tested on the following system.
 
 ## Getting Started
 1. **Initial Screen**:
-   - Upon starting the program, you'll be greeted with the **Start Screen** (![Start Screen](/home/daniel/RnD/tcl-torch/images/readme/start_screen.png)).
+   - Upon starting the program, you'll be greeted with the **Start Screen** (![Start Screen](images/readme/start_screen.png)).
    - Click "Verify Python Installation" to ensure all required packages are installed.
    - Then click "Start Program" to begin.
 
 2. **Function Selection**:
-   - You'll then see the **Function Select** screen (![Function Select](/home/daniel/RnD/tcl-torch/images/readme/function_select.png)).
+   - You'll then see the **Function Select** screen (![Function Select](images/readme/function_select.png)).
    - Click on "Fit1D Data" to proceed.
 
 3. **Data Upload**:
    - Click "Upload CSV" to upload your data file.
    - Data should be in CSV format with two columns, each having a header.
    - You can use your own CSV or an example from the `example` directory.
-   - Verify the uploaded data using "View Uploaded CSV" (![View Upload CSV](/home/daniel/RnD/tcl-torch/images/readme/view_upload_csv.png)).
+   - Verify the uploaded data using "View Uploaded CSV" (![View Upload CSV](images/readme/view_upload_csv.png)).
 
 4. **Design Neural Network**:
-   - Click on "Design Neural Network Architecture" (![Design Neural Network](/home/daniel/RnD/tcl-torch/images/readme/design_neural_network.png)).
+   - Click on "Design Neural Network Architecture" (![Design Neural Network](images/readme/design_neural_network.png)).
    - Set parameters such as neurons per layer, number of layers, learning rate, number of epochs, and input data.
    - Note: GPU usage is currently disabled.
 
-5. **Train Neural Network**:
+5. **Train Neural Network and View Results**(![Train Neural Network](images/readme/fit_neural_network.png)):
    - After designing the architecture, click on "Train Neural Network".
    - Select one of the neural networks and click "Train and Predict on Data".
    - Training is quick with default settings but may vary with larger datasets or complex architectures.
-
-6. **View Results**:
    - Post-training, a visual representation of the original data and the neural network fit will be displayed.
    - The fit and weights are saved in the `resources/nn_models/{your model name}` directory.
 
