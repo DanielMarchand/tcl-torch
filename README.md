@@ -27,16 +27,17 @@ This system installation has only been tested on the following system.
    - Then click "Start Program" to begin.
 
 ### 2. **Function Selection**:
-![Function Select](images/readme/function_select.png)
-![View Upload CSV](images/readme/upload_csv.png)
    - You'll then see the **Function Select** screen.
    - Click on "Fit1D Data" to proceed.
 
 ### 3. **Data Upload**:
-![View Upload CSV](images/readme/view_upload_csv.png)
+![Function Select](images/readme/function_select.png)
+![View Upload CSV](images/readme/upload_csv.png)
    - Click "Upload CSV" to upload your data file.
    - Data should be in CSV format with two columns, each having a header.
    - You can use your own CSV or an example from the `example` directory.
+### 3. **View CSV**:
+![View Upload CSV](images/readme/view_upload_csv.png)
    - Verify the uploaded data using "View Uploaded CSV".
 
 ### 4. **Design Neural Network**:
